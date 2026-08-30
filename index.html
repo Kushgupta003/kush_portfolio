@@ -287,14 +287,27 @@
       .code-card { width: 94%; }
       .contact { padding: 32px 20px; }
     }
+    .nav-logo {
+      width: 38px;
+      height: 38px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      border: 2px solid rgba(103, 232, 249, 0.6);
+      box-shadow: 0 0 15px rgba(103, 232, 249, 0.25);
+}
   </style>
+  <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container py-2">
-    <a class="navbar-brand fw-bold" href="#home">Kush<span class="brand-dot">.</span></a>
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#home">
+      <img src="favicon.png" alt="Kush Gupta" class="nav-logo">
+      <span>Kush Gupta<span class="brand-dot">.</span></span>
+    </a>
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
     </button>
