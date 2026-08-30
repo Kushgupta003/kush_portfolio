@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kush Gupta — Software Engineer, Python Developer and AI/ML Enthusiast">
+  <title>Kush Gupta | Software Engineer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-soft: #0c1020;
+      --card: rgba(17, 24, 39, .58);
+      --line: rgba(148, 163, 184, .16);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --accent-3: #22d3ee;
+      --shadow: 0 25px 80px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(124,58,237,.18), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(6,182,212,.12), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 45px 45px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+      z-index: -1;
+    }
+
+    .navbar {
+      background: rgba(7,10,18,.68);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .navbar-brand { font-family: "Space Grotesk"; letter-spacing: -.5px; }
+    .brand-dot { color: var(--accent-3); }
+    .nav-link { color: #cbd5e1 !important; margin-left: 12px; }
+    .nav-link:hover { color: white !important; }
+
+    .hero {
+      min-height: 100vh;
+      padding: 145px 0 80px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .eyebrow, .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(34,211,238,.22);
+      background: rgba(8,47,73,.25);
+      color: #a5f3fc;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+    .pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34,197,94,.55);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 9px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    .hero h1 {
+      font-family: "Space Grotesk";
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: .9;
+      letter-spacing: -5px;
+      margin: 24px 0;
+    }
+    .gradient-text {
+      background: linear-gradient(110deg, #fff 15%, #c4b5fd 48%, #67e8f9 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 650px;
+      line-height: 1.8;
+    }
+
+    .typing { color: #67e8f9; font-weight: 700; min-height: 32px; }
+
+    .btn-main {
+      background: linear-gradient(110deg, var(--accent), #4f46e5);
+      border: 0;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 12px 35px rgba(124,58,237,.25);
+      transition: .25s;
+    }
+    .btn-main:hover { transform: translateY(-3px); color: white; box-shadow: 0 18px 45px rgba(124,58,237,.38); }
+    .btn-ghost {
+      color: white;
+      border: 1px solid var(--line);
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+      font-weight: 600;
+      transition: .25s;
+    }
+    .btn-ghost:hover { transform: translateY(-3px); border-color: rgba(103,232,249,.4); color: white; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 480px;
+      display: grid;
+      place-items: center;
+    }
+    .orbit {
+      width: 350px;
+      height: 350px;
+      border: 1px solid rgba(103,232,249,.16);
+      border-radius: 50%;
+      position: absolute;
+      animation: spin 18s linear infinite;
+    }
+    .orbit::before, .orbit::after {
+      content: "";
+      position: absolute;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #67e8f9;
+      box-shadow: 0 0 25px #67e8f9;
+    }
+    .orbit::before { top: -5px; left: 50%; }
+    .orbit::after { bottom: 35px; right: 3px; background: #a78bfa; box-shadow: 0 0 25px #a78bfa; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .code-card {
+      width: min(390px, 92%);
+      background: rgba(10,15,28,.82);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      transform: rotate(2deg);
+      z-index: 2;
+    }
+    .window-dots span { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: #475569; }
+    .code-card pre { margin: 22px 0 0; color: #cbd5e1; font-size: .86rem; line-height: 1.8; }
+    .code-purple { color: #c4b5fd; }
+    .code-cyan { color: #67e8f9; }
+    .code-green { color: #86efac; }
+
+    section { padding: 105px 0; }
+    .section-kicker { color: #67e8f9; text-transform: uppercase; font-size: .78rem; font-weight: 800; letter-spacing: 2px; }
+    .section-title { font-family: "Space Grotesk"; font-size: clamp(2.2rem, 5vw, 3.7rem); letter-spacing: -2px; margin: 8px 0 15px; }
+    .section-desc { color: var(--muted); max-width: 650px; line-height: 1.8; }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      transition: transform .3s, border-color .3s;
+    }
+    .glass:hover { transform: translateY(-5px); border-color: rgba(103,232,249,.22); }
+
+    .about-card { padding: 30px; height: 100%; }
+    .about-card p { color: var(--muted); line-height: 1.85; }
+    .mini-stat {
+      padding: 22px;
+      height: 100%;
+    }
+    .mini-stat h3 { font-family: "Space Grotesk"; font-size: 2rem; margin: 0; }
+    .mini-stat p { color: var(--muted); margin: 5px 0 0; font-size: .9rem; }
+
+    .skill {
+      padding: 25px;
+      height: 100%;
+    }
+    .skill-icon {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: 14px;
+      background: rgba(124,58,237,.14);
+      border: 1px solid rgba(124,58,237,.2);
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+    .skill p { color: var(--muted); margin: 0; line-height: 1.7; }
+
+    .project {
+      padding: 30px;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .project::after {
+      content: "";
+      position: absolute;
+      width: 170px; height: 170px;
+      right: -70px; top: -70px;
+      background: radial-gradient(circle, rgba(124,58,237,.2), transparent 70%);
+    }
+    .project-number { color: #64748b; font-weight: 800; font-size: .8rem; letter-spacing: 1px; }
+    .project h3 { font-family: "Space Grotesk"; margin: 12px 0; }
+    .project p { color: var(--muted); line-height: 1.75; }
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      margin: 4px 4px 0 0;
+      border-radius: 999px;
+      font-size: .72rem;
+      background: rgba(148,163,184,.08);
+      border: 1px solid var(--line);
+      color: #cbd5e1;
+    }
+
+    .timeline { position: relative; padding-left: 35px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 1px; background: linear-gradient(var(--accent-2), transparent);
+    }
+    .timeline-item { position: relative; margin-bottom: 38px; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -33px; top: 7px;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--bg); border: 3px solid #67e8f9;
+      box-shadow: 0 0 20px rgba(103,232,249,.5);
+    }
+    .timeline-item h3 { font-family: "Space Grotesk"; margin-bottom: 4px; }
+    .date { color: #67e8f9; font-size: .85rem; font-weight: 700; }
+    .timeline-item p, .timeline-item li { color: var(--muted); line-height: 1.75; }
+
+    .contact {
+      padding: 50px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.2), transparent 45%),
+        var(--card);
+    }
+    .contact h2 { font-family: "Space Grotesk"; font-size: clamp(2.3rem, 6vw, 4.5rem); letter-spacing: -2px; }
+    .contact p { color: var(--muted); max-width: 600px; margin: 15px auto 25px; line-height: 1.8; }
+    .contact a.text-link { color: #67e8f9; text-decoration: none; }
+    footer { padding: 35px 0; color: #64748b; border-top: 1px solid var(--line); }
+
+    .reveal { opacity: 0; transform: translateY(25px); transition: .8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 991px) {
+      .hero { padding-top: 125px; }
+      .hero-visual { min-height: 390px; margin-top: 30px; }
+      .orbit { width: 290px; height: 290px; }
+    }
+    @media (max-width: 575px) {
+      .hero h1 { letter-spacing: -3px; }
+      .hero-visual { min-height: 340px; }
+      .orbit { width: 250px; height: 250px; }
+      .code-card { width: 94%; }
+      .contact { padding: 32px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container py-2">
+    <a class="navbar-brand fw-bold" href="#home">Kush<span class="brand-dot">.</span></a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+          <a href="resume.pdf" download class="btn btn-main btn-sm">Resume ↗</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="home">
+  <section class="hero container">
+    <div class="row align-items-center w-100">
+      <div class="col-lg-7">
+        <div class="eyebrow reveal"><span class="pulse"></span> Available for opportunities</div>
+
+        <h1 class="reveal">
+          Building the<br>
+          <span class="gradient-text">future with code.</span>
+        </h1>
+
+        <div class="typing reveal"><span id="typing"></span><span>|</span></div>
+
+        <p class="hero-subtitle mt-3 reveal">
+          I'm Kush Gupta, a Software Engineer focused on Python, Django, backend systems
+          and AI-powered applications. I turn ideas into practical, scalable products.
+        </p>
+
+        <div class="d-flex flex-wrap gap-3 mt-4 reveal">
+          <a href="#projects" class="btn btn-main">Explore my work ↓</a>
+          <a href="resume.pdf" download class="btn btn-ghost">Download Resume</a>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3 mt-4 reveal">
+          <a href="https://github.com/Kushgupta003" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a>
+          <a href="https://linkedin.com/in/kush-gupta-cse" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">LinkedIn ↗</a>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="hero-visual reveal">
+          <div class="orbit"></div>
+          <div class="code-card">
+            <div class="window-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <pre><span class="code-purple">const</span> developer = {
+  name: <span class="code-green">"Kush Gupta"</span>,
+  role: <span class="code-green">"Software Engineer"</span>,
+  stack: [
+    <span class="code-cyan">"Python"</span>,
+    <span class="code-cyan">"Django"</span>,
+    <span class="code-cyan">"FastAPI"</span>,
+    <span class="code-cyan">"LangGraph"</span>
+  ],
+  mindset: <span class="code-green">"Build. Learn. Ship."</span>
+};</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-7">
+          <div class="glass about-card reveal">
+            <div class="section-kicker">01 / About</div>
+            <h2 class="section-title">Code with purpose.</h2>
+            <p>
+              I'm a passionate Software Engineer focused on building scalable web applications
+              and AI-powered systems. I have hands-on experience with Python, Django, FastAPI,
+              LangGraph and modern backend technologies.
+            </p>
+            <p>
+              I've built projects including a RAG-based AI customer support agent, a Django
+              learning platform and responsive web applications. I enjoy solving real-world
+              problems, improving performance and continuously learning new technologies.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="row g-4 h-100">
+            <div class="col-6">
+              <div class="glass mini-stat reveal">
+                <h3>95%+</h3><p>RAG chatbot accuracy</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="glass mini-stat reveal">
+                <h3>1–2s</h3><p>AI response time</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="glass mini-stat reveal">
+                <h3>25%</h3><p>Performance improvement</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="glass mini-stat reveal">
+                <h3>A++</h3><p>Internship performance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-kicker reveal">02 / Toolkit</div>
+      <h2 class="section-title reveal">My tech stack.</h2>
+      <p class="section-desc reveal">The tools I use to build web products, backend services and AI-powered systems.</p>
+
+      <div class="row g-4 mt-2">
+        <div class="col-md-6 col-lg-3">
+          <div class="glass skill reveal">
+            <div class="skill-icon">⌨️</div>
+            <h4>Languages</h4>
+            <p>Python, JavaScript, SQL</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="glass skill reveal">
+            <div class="skill-icon">⚙️</div>
+            <h4>Backend</h4>
+            <p>Django, FastAPI, REST APIs, SQLite, MySQL</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="glass skill reveal">
+            <div class="skill-icon">🤖</div>
+            <h4>AI / ML</h4>
+            <p>RAG, FAISS, LangGraph, Sentence Transformers</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="glass skill reveal">
+            <div class="skill-icon">🛠️</div>
+            <h4>Tools</h4>
+            <p>Git, GitHub, VS Code, Bootstrap, Render, Postman</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-kicker reveal">03 / Selected work</div>
+      <h2 class="section-title reveal">Things I've built.</h2>
+      <p class="section-desc reveal">A few projects where backend engineering meets practical product thinking.</p>
+
+      <div class="row g-4 mt-2">
+        <div class="col-lg-6">
+          <div class="glass project reveal">
+            <div class="project-number">01 — AI / BACKEND</div>
+            <h3>AI Customer Support Agent</h3>
+            <p>
+              Production-ready AI support system built with FastAPI and LangGraph.
+              Uses RAG with FAISS and Sentence Transformers for context-aware answers,
+              with 95%+ reported accuracy and 1–2 second response time.
+            </p>
+            <div>
+              <span class="tag">Python</span><span class="tag">FastAPI</span>
+              <span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">FAISS</span>
+            </div>
+            <a href="https://github.com/Kushgupta003/ai-support-agent" target="_blank" rel="noopener" class="btn btn-main btn-sm mt-4">View Code ↗</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="glass project reveal">
+            <div class="project-number">02 — FULL STACK</div>
+            <h3>Online Learning Platform</h3>
+            <p>
+              Django-based LMS with authentication, dashboards and REST APIs.
+              Built for structured online learning workflows and deployed live on Render.
+            </p>
+            <div>
+              <span class="tag">Django</span><span class="tag">Python</span>
+              <span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">Bootstrap</span>
+            </div>
+            <a href="https://online-learning-platform-1cc0.onrender.com/" target="_blank" rel="noopener" class="btn btn-main btn-sm mt-4">Live Demo ↗</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="glass project reveal">
+            <div class="project-number">03 — FRONTEND</div>
+            <h3>University Website</h3>
+            <p>
+              Responsive university portal with structured layouts, navigation and
+              mobile-friendly design using HTML, CSS and Bootstrap.
+            </p>
+            <div>
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span><span class="tag">Responsive UI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="glass project reveal">
+            <div class="project-number">04 — JAVASCRIPT</div>
+            <h3>To-Do Web App</h3>
+            <p>
+              Task management application with add, edit, delete and mark-complete
+              functionality using JavaScript and real-time DOM updates.
+            </p>
+            <div>
+              <span class="tag">JavaScript</span><span class="tag">DOM</span><span class="tag">HTML</span><span class="tag">CSS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-kicker reveal">04 / Experience</div>
+          <h2 class="section-title reveal">Where I learned to ship.</h2>
+          <p class="section-desc reveal">
+            Hands-on development experience working with real application code,
+            backend logic, databases and deployment workflows.
+          </p>
+        </div>
+
+        <div class="col-lg-7 mt-5 mt-lg-0">
+          <div class="timeline">
+            <div class="timeline-item reveal">
+              <div class="date">AUG 2025 — OCT 2025</div>
+              <h3>Full Stack Developer Intern</h3>
+              <p><strong>Softpro India Technologies Pvt. Ltd. — Noida</strong></p>
+              <ul>
+                <li>Developed full-stack web applications using Python, Django, HTML, CSS and JavaScript.</li>
+                <li>Designed backend logic and database models for CRUD operations.</li>
+                <li>Improved UI responsiveness by 30% through optimized frontend components.</li>
+                <li>Used Git & GitHub and worked with production deployment workflows.</li>
+              </ul>
+              <p><strong>🏆 A++ Grade for performance</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="glass contact reveal">
+        <div class="section-kicker">05 / Let's connect</div>
+        <h2>Have an idea?<br><span class="gradient-text">Let's build it.</span></h2>
+        <p>
+          I'm open to Software Engineer, Python Developer, Backend Developer and
+          AI/ML opportunities. Feel free to reach out.
+        </p>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+          <a class="btn btn-main" href="mailto:guptakush078@gmail.com">Email Me ↗</a>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/kush-gupta-cse" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/Kushgupta003" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <div class="mt-4">
+          <a class="text-link" href="mailto:guptakush078@gmail.com">guptakush078@gmail.com</a>
+          <span class="mx-2 text-secondary">•</span>
+          <span class="text-secondary">9927054690</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container d-flex justify-content-between flex-wrap gap-2">
+    <span>© 2026 Kush Gupta</span>
+    <span>Built with HTML · CSS · JavaScript · Bootstrap</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const words = ["Python Developer", "Django Developer", "AI/ML Enthusiast", "Backend Engineer"];
+  let wordIndex = 0, charIndex = 0, deleting = false;
+  const typing = document.getElementById("typing");
+
+  function typeLoop() {
+    const word = words[wordIndex];
+    typing.textContent = deleting ? word.substring(0, charIndex--) : word.substring(0, charIndex++);
+
+    if (!deleting && charIndex > word.length) {
+      deleting = true;
+      setTimeout(typeLoop, 1200);
+      return;
+    }
+    if (deleting && charIndex < 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      charIndex = 0;
+    }
+    setTimeout(typeLoop, deleting ? 55 : 90);
+  }
+  typeLoop();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+  // Close mobile navbar after clicking a link
+  document.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+      const nav = document.getElementById("nav");
+      if (nav.classList.contains("show")) {
+        bootstrap.Collapse.getOrCreateInstance(nav).hide();
+      }
+    });
+  });
+</script>
+</body>
+</html>
